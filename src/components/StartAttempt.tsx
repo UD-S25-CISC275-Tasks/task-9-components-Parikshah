@@ -22,14 +22,14 @@ export function StartAttempt(): React.JSX.Element {
                 onClick={() => {
                     setInProgress(false);
                 }}
-                disabled={inProgress}
+                disabled={!inProgress}
             >
                 Stop Quiz
             </Button>
 
             <Button
                 onClick={() => {
-                    setAttempts(attempts + 1);
+                    setAttempts((prev) => Math.min(prev + 1, 4));
                 }}
                 disabled={inProgress}
             >
