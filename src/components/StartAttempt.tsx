@@ -29,9 +29,9 @@ export function StartAttempt(): React.JSX.Element {
 
             <Button
                 onClick={() => {
-                    setAttempts((prev) => Math.min(prev + 1, 4));
+                    setAttempts(attempts + 1); // Always increases attempts
                 }}
-                disabled={inProgress}
+                disabled={inProgress} // Still prevents clicking during a quiz
             >
                 Mulligan
             </Button>
