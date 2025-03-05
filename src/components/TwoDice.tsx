@@ -12,17 +12,25 @@ export function d6(): number {
 }
 
 export function TwoDice(): React.JSX.Element {
-    const [leftDie, setLeftDie] = useState<number>(d6());
+    // Initializing the dice with different values, ensuring they are not the same
+    const [leftDie, setLeftDie] = useState<number>(() => {
+        let first = d6();
+        let second = d6();
+        while (first === second) {
+            second = d6();
+        }
+        return first;
+    });
     const [rightDie, setRightDie] = useState<number>(d6());
 
     function getResultMessage(): string | null {
         if (leftDie === rightDie) {
             if (leftDie === 1) {
-                return "You Lose!"; // Snake eyes
+                return "You Lose!";
             }
-            return "You Win!"; // Matching numbers (not snake eyes)
+            return "You Win!";
         }
-        return null; // No win/loss
+        return null;
     }
 
     return (
@@ -32,14 +40,14 @@ export function TwoDice(): React.JSX.Element {
             <div>
                 <Button
                     onClick={() => {
-                        setLeftDie(d6()); // Update left die with random roll
+                        setLeftDie(d6());
                     }}
                 >
                     Roll Left
                 </Button>
                 <Button
                     onClick={() => {
-                        setRightDie(d6()); // Update right die with random roll
+                        setRightDie(d6());
                     }}
                 >
                     Roll Right
